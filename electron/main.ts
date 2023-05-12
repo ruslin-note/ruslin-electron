@@ -3,6 +3,7 @@ process.env.PUBLIC = app.isPackaged ? process.env.DIST : join(process.env.DIST, 
 
 import { join } from 'path'
 import { app, BrowserWindow, shell } from 'electron'
+// import { add } from 'ruslin-addon/addon'
 
 let win: BrowserWindow | null
 // Here, you can also use other preload
@@ -14,6 +15,8 @@ function createWindow() {
     icon: join(process.env.PUBLIC, 'logo.svg'),
     title: 'Test',
     webPreferences: {
+      contextIsolation: true,
+      nodeIntegration: true,
       preload,
     },
   })

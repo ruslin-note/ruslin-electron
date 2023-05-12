@@ -1,0 +1,19 @@
+[package]
+name = "ruslin-addon"
+version = "0.1.0"
+edition = "2021"
+publish = false
+build = "build.rs"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+path = "src-native/lib.rs"
+crate-type = ["cdylib"]
+
+[dependencies]
+napi = { version = "2.12.5", features = ["serde-json", "napi6", "async"] }
+napi-derive = "2.12.5"
+
+[build-dependencies]
+napi-build = "2.0.1"

@@ -1,0 +1,6 @@
+{
+    "private": true,
+    "name": "ruslin-addon",
+    "main": "addon.node",
+    "types": "main.d"
+}

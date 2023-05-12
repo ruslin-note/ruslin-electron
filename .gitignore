@@ -4,3 +4,10 @@ dist
 release
 
 .DS_Store
+
+# Added by cargo
+
+/target
+
+/ruslin-addon/addon.node
+/ruslin-addon/addon.d.ts

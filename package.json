@@ -11,9 +11,15 @@
   "private": true,
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build && electron-builder"
+    "build": "tsc && vite build && electron-builder",
+    "napi": "napi build ruslin-addon --dts addon.d.ts --release",
+    "napi:dev": "napi build ruslin-addon --dts addon.d.ts"
+  },
+  "napi": {
+    "name": "addon"
   },
   "devDependencies": {
+    "@napi-rs/cli": "^2.15.2",
     "electron": "^24.3.0",
     "electron-builder": "^23.6.0",
     "sass": "^1.62.1",
@@ -22,5 +28,8 @@
     "vite": "^4.3.5",
     "vite-plugin-electron": "^0.11.2",
     "vite-plugin-solid": "^2.7.0"
+  },
+  "dependencies": {
+    "vite-plugin-electron-renderer": "^0.14.2"
   }
 }

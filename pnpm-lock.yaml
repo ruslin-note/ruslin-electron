@@ -1,6 +1,14 @@
 lockfileVersion: '6.0'
 
+dependencies:
+  vite-plugin-electron-renderer:
+    specifier: ^0.14.2
+    version: 0.14.2
+
 devDependencies:
+  '@napi-rs/cli':
+    specifier: ^2.15.2
+    version: 2.15.2
   electron:
     specifier: ^24.3.0
     version: 24.3.0
@@ -663,6 +671,12 @@ packages:
       tmp-promise: 3.0.3
     transitivePeerDependencies:
       - supports-color
+    dev: true
+
+  /@napi-rs/cli@2.15.2:
+    resolution: {integrity: sha512-80tBCtCnEhAmFtB9oPM0FL74uW7fAmtpeqjvERH7Q1z/aZzCAs/iNfE7U3ehpwg9Q07Ob2Eh/+1guyCdX/p24w==}
+    engines: {node: '>= 10'}
+    hasBin: true
     dev: true
 
   /@sindresorhus/is@4.6.0:
@@ -1977,6 +1991,10 @@ packages:
     resolution: {integrity: sha512-0/BnGCCfyUMkBpeDgWihanIAF9JmZhHBgUhEqzvf+adhNGLoP6TaiI5oF8oyb3I45P+PcnrqihSf01M0l0G5+Q==}
     dev: true
 
+  /lib-esm@0.3.0:
+    resolution: {integrity: sha512-P7YcG7OnoaGL2h4j46g/m0P2xHMXlYf+0iCDvVrEfzUVxLe+abytgd2VjUhj9puqEgqRGEDbT504YWj75jHacA==}
+    dev: false
+
   /lodash@4.17.21:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
     dev: true
@@ -2555,6 +2573,12 @@ packages:
       extsprintf: 1.4.1
     dev: true
     optional: true
+
+  /vite-plugin-electron-renderer@0.14.2:
+    resolution: {integrity: sha512-fhp1cnez2qvL90UuHrvfI+mEzKAfn4u31wnZpndxU+s12DfCjFMtgNkV4QBJatueuw53IK1jQAvGUUhz0+d3qA==}
+    dependencies:
+      lib-esm: 0.3.0
+    dev: false
 
   /vite-plugin-electron@0.11.2:
     resolution: {integrity: sha512-umQRmSuA80JVxKB3PfO55o8mFTrW+sEtu7kZ5TYKAnkuYpKw7qgxl4f/65gp8x5BGHJjYh/iIRIE26x3Xqc4mQ==}

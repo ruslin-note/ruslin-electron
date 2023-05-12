@@ -54,3 +54,7 @@ npm run build
 [vite-plugin-electron](https://github.com/electron-vite/vite-plugin-electron)
 
 [SolidJS](https://www.solidjs.com/)
+
+## Credits
+
+- [ferrum](https://github.com/probablykasper/ferrum)

@@ -6,6 +6,11 @@
  * https://www.electronjs.org/docs/latest/tutorial/tutorial-preload
  */
 
+import { contextBridge } from 'electron'
+import addon from '../ruslin-addon'
+
+contextBridge.exposeInMainWorld('addon', addon)
+
 function domReady(condition: DocumentReadyState[] = ['complete', 'interactive']) {
   return new Promise(resolve => {
     if (condition.includes(document.readyState)) {
