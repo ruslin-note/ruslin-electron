@@ -2,7 +2,10 @@ import { defineConfig } from 'vite';
 import { resolve } from 'path';
 import electron from 'vite-plugin-electron';
 import solidPlugin from 'vite-plugin-solid';
-import renderer from 'vite-plugin-electron-renderer'
+import renderer from 'vite-plugin-electron-renderer';
+import autoprefixer from 'autoprefixer';
+import cssnano from 'cssnano';
+const prefixer = require('postcss-variables-prefixer'); // Could not find a declaration file for module ...
 
 export default defineConfig({
   resolve: {
@@ -10,6 +13,11 @@ export default defineConfig({
       '@': resolve(__dirname, './src'), // render
       'ruslin-addon': resolve(__dirname, './ruslin-addon'), // main
     },
+  },
+  css: {
+    postcss: {
+      plugins: [autoprefixer(), cssnano(), prefixer({ prefix: "fds-" })]
+    }
   },
   plugins: [
     solidPlugin(),
