@@ -1,0 +1,72 @@
+name: Build
+
+on:
+  push:
+    branches: [ "main" ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+          - { os: macos-latest, cross-target: aarch64-apple-darwin }
+          - { os: ubuntu-latest, cross-target: aarch64-unknown-linux-gnu }
+          - { os: windows-latest, cross-target: aarch64-pc-windows-msvc }
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: LLVM setup
+        run: sudo bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
+        if: matrix.os == 'ubuntu-latest'
+      - name: Cross build setup
+        run: sudo apt-get install binutils-aarch64-linux-gnu g++-aarch64-linux-gnu libc6-dev-arm64-cross
+        if: matrix.os == 'ubuntu-latest'
+
+      - name: Rust setup
+        uses: dtolnay/rust-toolchain@stable
+        # with:
+        #   targets: ${{ matrix.cross-target }}
+
+      - name: Add ${{ matrix.cross-target }} target
+        run: rustup target add ${{ matrix.cross-target }}
+
+      # - name: Install ziglang
+      #   uses: goto-bus-stop/setup-zig@v1
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Node.js setup
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+          cache: 'pnpm'
+
+      - run: pnpm install
+
+      - name: napi
+        run: pnpm run napi
+      - name: build
+        run: pnpm run build
+
+      - name: napi (arm64)
+        run: pnpm run napi --target ${{ matrix.cross-target }}
+      - name: build (arm64)
+        run: pnpm run build --arm64
+
+      - name: Upload artifact for ${{ matrix.os }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: app-${{ matrix.os }}
+          path: |
+            release/*/*.AppImage
+            release/*/*.dmg
+            release/*/*.exe

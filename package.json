@@ -11,7 +11,7 @@
   "private": true,
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build && electron-builder",
+    "build": "tsc && vite build && electron-builder --publish never",
     "napi": "napi build ruslin-addon --dts addon.d.ts --release",
     "napi:dev": "napi build ruslin-addon --dts addon.d.ts"
   },

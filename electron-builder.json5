@@ -2,7 +2,8 @@
  * @see https://www.electron.build/configuration/configuration
  */
 {
-  appId: 'YourAppID',
+  appId: 'org.dianqk.ruslin-electron',
+  productName: 'Ruslin',
   asar: true,
   directories: {
     output: 'release/${version}',
@@ -10,17 +11,16 @@
   "asarUnpack": ["**/*.node"],
   files: ['dist', 'dist-electron', 'ruslin-addon/addon.node'],
   mac: {
-    artifactName: '${productName}_${version}.${ext}',
     target: ['dmg'],
+    artifactName: '${productName}-${version}-${arch}.${ext}',
+  },
+  linux: {
+    target: ['AppImage'],
+    artifactName: '${productName}-${version}-${arch}.${ext}',
   },
   win: {
-    target: [
-      {
-        target: 'nsis',
-        arch: ['x64'],
-      },
-    ],
-    artifactName: '${productName}_${version}.${ext}',
+    target: ['nsis'],
+    artifactName: '${productName}-${version}-${arch}.${ext}',
   },
   nsis: {
     oneClick: false,
