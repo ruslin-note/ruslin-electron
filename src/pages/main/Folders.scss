@@ -1,4 +1,9 @@
 .folders-container {
   min-width: 180px;
   background-color: var(--solid-background-base);
+
+  .folders-header {
+    padding-block: 10px;
+    padding-inline: 16px;
+  }
 }
