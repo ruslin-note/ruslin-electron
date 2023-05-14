@@ -2,7 +2,6 @@ import { defineConfig } from 'vite';
 import { resolve } from 'path';
 import electron from 'vite-plugin-electron';
 import solidPlugin from 'vite-plugin-solid';
-import renderer from 'vite-plugin-electron-renderer';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 const prefixer = require('postcss-variables-prefixer'); // Could not find a declaration file for module ...
@@ -21,11 +20,6 @@ export default defineConfig({
   },
   plugins: [
     solidPlugin(),
-    renderer({
-      resolve: {
-        'ruslin-addon': { type: 'cjs' },
-      },
-    }),
     electron([
       {
         // Main-Process entry file of the Electron App.

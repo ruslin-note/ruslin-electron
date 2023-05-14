@@ -1,3 +1,4 @@
+/* eslint-disable */
 import type Addon from 'ruslin-addon/addon'
 
 declare global {
