@@ -1,17 +1,21 @@
-import { createSignal } from 'solid-js';
+import type { Component } from 'solid-js';
 import './ListItem.scss';
 
-export const ListItem = () => {
-  const [select, setSelect] = createSignal(false);
-
+export const ListItem: Component<{
+  selected: boolean, 
+  disabled?: boolean, 
+  title: string,
+  onClick: () => void,
+}> = (props) => {
   return (
     <a
+      class='list-item'
       classList={{
-        'list-item': true,
-        'selected': select(),
+        'selected': props.selected,
+        'disabled': props.disabled,
       }}
-      onClick={() => setSelect((s) => !s)}>
-      ListItem
+      onClick={props.onClick}>
+      { props.title }
     </a>
   );
 };

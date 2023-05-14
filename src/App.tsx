@@ -1,18 +1,8 @@
-import viteLogo from '/vite.svg';
-import solidLogo from '/solidjs.svg';
-import typescriptLogo from './typescript.svg';
-import { Counter } from './components/Counter';
-import { ListItem } from './components';
+// import { Counter } from './components/Counter';
+import { Main } from './pages/main';
 
 export const App = () => {
   return (
-    <div>
-      <div>
-        <ListItem></ListItem>
-        <ListItem></ListItem>
-        <ListItem></ListItem>
-      </div>
-      {/* <Counter /> */}
-    </div>
+    <Main></Main>
   );
 };
