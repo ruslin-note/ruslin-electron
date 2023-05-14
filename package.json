@@ -37,6 +37,7 @@
     "postcss-variables-prefixer": "^1.2.0",
     "prettier": "^2.8.8",
     "sass": "^1.62.1",
+    "solid-icons": "^1.0.4",
     "solid-js": "^1.7.5",
     "typescript": "^5.0.4",
     "vite": "^4.3.5",

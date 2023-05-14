@@ -49,6 +49,9 @@ devDependencies:
   sass:
     specifier: ^1.62.1
     version: 1.62.1
+  solid-icons:
+    specifier: ^1.0.4
+    version: 1.0.4(solid-js@1.7.5)
   solid-js:
     specifier: ^1.7.5
     version: 1.7.5
@@ -4119,6 +4122,15 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  /solid-icons@1.0.4(solid-js@1.7.5):
+    resolution: {integrity: sha512-gJTp4in3+OYCs9WvDkSLt4Los2unR3Uoder8wjh15GsfP20xiNOLfPTJllXmn+fI8+k3x7bRYtLGIgWd9fUQug==}
+    engines: {node: '>= 16'}
+    peerDependencies:
+      solid-js: '*'
+    dependencies:
+      solid-js: 1.7.5
+    dev: true
 
   /solid-js@1.7.5:
     resolution: {integrity: sha512-GfJ8na1e9FG1oAF5xC24BM+ATLym0sfH+ZblkbBFpueYdq3fWAoA5Ve+jGeIeLI7jmMGfa0rUaKruszNm2sH8w==}

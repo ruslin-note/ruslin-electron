@@ -1,12 +1,26 @@
-import { ListItem, TextBlock, Variant } from "@/components";
+import { IconButton, ListItem, TextBlock, Variant } from "@/components";
+import { IoAddSharp } from "solid-icons/io";
 import "./Folders.scss";
+import { createSignal } from "solid-js";
 
 export const Folders = () => {
+  const [title, setTitle] = createSignal("");
+
   return (
     <div class="folders-container">
-      <TextBlock variant={Variant.BodyStrong} class="folders-header">
-        Notebooks
-      </TextBlock>
+      <div class="folders-header">
+        <TextBlock variant={Variant.BodyStrong}>
+          Notebooks
+          {title()}
+        </TextBlock>
+        <IconButton
+          onClick={() => {
+            setTitle("ABC");
+          }}
+        >
+          <IoAddSharp />
+        </IconButton>
+      </div>
       <ListItem selected={true} title="First" onClick={() => {}}></ListItem>
       <ListItem selected={false} title="Second" onClick={() => {}}></ListItem>
       <ListItem
