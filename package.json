@@ -14,7 +14,8 @@
     "build": "tsc && vite build && electron-builder --publish never",
     "napi": "napi build ruslin-addon --dts addon.d.ts --release",
     "napi:dev": "napi build ruslin-addon --dts addon.d.ts",
-    "lint": "eslint ./src/**/*.{tsx,ts}"
+    "lint": "eslint ./src/**/*.{tsx,ts} && prettier --check src",
+    "format": "eslint --fix ./src/**/*.{tsx,ts} && prettier --write src"
   },
   "napi": {
     "name": "addon"
@@ -27,12 +28,14 @@
     "electron": "^24.3.0",
     "electron-builder": "^23.6.0",
     "eslint": "^8.40.0",
+    "eslint-config-prettier": "^8.8.0",
     "eslint-config-standard-with-typescript": "^34.0.1",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-n": "^15.7.0",
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-solid": "^0.12.1",
     "postcss-variables-prefixer": "^1.2.0",
+    "prettier": "^2.8.8",
     "sass": "^1.62.1",
     "solid-js": "^1.7.5",
     "typescript": "^5.0.4",

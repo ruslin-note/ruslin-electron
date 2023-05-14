@@ -1,9 +1,9 @@
-import './style.scss';
-import './components/theme.css';
+import "./style.scss";
+import "./components/theme.css";
 
-import { render } from 'solid-js/web';
-import { App } from './App';
+import { render } from "solid-js/web";
+import { App } from "./App";
 
-render(() => <App />, document.getElementById('app')!);
+render(() => <App />, document.getElementById("app")!);
 
-postMessage({ payload: 'removeLoading' }, '*');
+postMessage({ payload: "removeLoading" }, "*");

@@ -1,8 +1,8 @@
 /* eslint-disable */
-import type Addon from 'ruslin-addon/addon'
+import type Addon from "ruslin-addon/addon";
 
 declare global {
-    interface Window {
-        addon: typeof Addon
-    }
+  interface Window {
+    addon: typeof Addon;
+  }
 }

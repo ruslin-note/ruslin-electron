@@ -1,5 +1,5 @@
-import addon from '@/lib/addon';
-import { createSignal } from 'solid-js';
+import addon from "@/lib/addon";
+import { createSignal } from "solid-js";
 
 export const Counter = () => {
   const [count, setCount] = createSignal(0);

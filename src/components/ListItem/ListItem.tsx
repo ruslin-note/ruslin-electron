@@ -1,21 +1,22 @@
-import type { Component } from 'solid-js';
-import './ListItem.scss';
+import type { Component } from "solid-js";
+import "./ListItem.scss";
 
 export const ListItem: Component<{
-  selected: boolean, 
-  disabled?: boolean, 
-  title: string,
-  onClick: () => void,
+  selected: boolean;
+  disabled?: boolean;
+  title: string;
+  onClick: () => void;
 }> = (props) => {
   return (
     <a
-      class='list-item'
+      class="list-item"
       classList={{
-        'selected': props.selected,
-        'disabled': props.disabled,
+        selected: props.selected,
+        disabled: props.disabled,
       }}
-      onClick={props.onClick}>
-      { props.title }
+      onClick={props.onClick}
+    >
+      {props.title}
     </a>
   );
 };
