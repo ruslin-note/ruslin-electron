@@ -6,10 +6,12 @@
  * https://www.electronjs.org/docs/latest/tutorial/tutorial-preload
  */
 
-import { contextBridge } from 'electron'
+// import { contextBridge } from 'electron'
 import addon from '../ruslin-addon'
 
-contextBridge.exposeInMainWorld('addon', addon)
+// contextBridge.exposeInMainWorld('addon', addon) // TODO: Re-enable contextIsolation
+window.__addon = addon;
+window.__appData = new addon.AppData(); // TODO: Multi-profile support?
 
 function domReady(condition: DocumentReadyState[] = ['complete', 'interactive']) {
   return new Promise(resolve => {

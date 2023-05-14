@@ -21,6 +21,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          submodules: 'recursive'
+          fetch-depth: 0
 
       - name: LLVM setup
         run: sudo bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"

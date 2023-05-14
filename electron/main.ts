@@ -15,7 +15,7 @@ function createWindow() {
     icon: join(process.env.PUBLIC, 'logo.svg'),
     title: 'Test',
     webPreferences: {
-      contextIsolation: true,
+      contextIsolation: false,
       nodeIntegration: true,
       preload,
     },

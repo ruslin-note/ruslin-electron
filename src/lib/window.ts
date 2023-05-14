@@ -3,6 +3,7 @@ import type Addon from "ruslin-addon/addon";
 
 declare global {
   interface Window {
-    addon: typeof Addon;
+    __addon: typeof Addon | null;
+    __appData: Addon.AppData | null;
   }
 }
