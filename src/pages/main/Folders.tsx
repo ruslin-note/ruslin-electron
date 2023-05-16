@@ -1,11 +1,14 @@
-import { IconButton, ListItem, TextBlock, Variant } from "@/components";
+import {
+  IconButton,
+  ListItem,
+  TextBlock,
+  TextBox,
+  Variant,
+} from "@/components";
 import { IoAddSharp } from "solid-icons/io";
 import "./Folders.scss";
 import { For, createResource, createSignal } from "solid-js";
 import appData from "@/lib/AppData";
-
-// const fetchUser = async (id) =>
-// (await fetch(`https://swapi.dev/api/people/${id}/`)).json();
 
 export const Folders = () => {
   let path = appData.path;
@@ -23,7 +26,7 @@ export const Folders = () => {
           onClick={() => {
             if (title().length > 0) {
               appData.createFolder(title()).then(() => {
-                console.log("create");
+                setTitle("");
                 refetch();
               });
             }
@@ -32,8 +35,12 @@ export const Folders = () => {
           <IoAddSharp />
         </IconButton>
       </div>
-      <div>
-        <input placeholder="name" onInput={(e) => setTitle(e.target.value)} />
+      <div class="folders-header">
+        <TextBox
+          placeholder="name"
+          value={title()}
+          onChange={(e) => setTitle(e.target.value)}
+        ></TextBox>
       </div>
       <For each={folders()}>
         {(folder) => (
