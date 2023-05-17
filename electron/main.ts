@@ -29,7 +29,7 @@ function createWindow() {
 
   if (url) {
     win.loadURL(url)
-    win.webContents.openDevTools()
+    // win.webContents.openDevTools()
   } else {
     win.loadFile(join(process.env.DIST, 'index.html'))
   }

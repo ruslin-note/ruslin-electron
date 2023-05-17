@@ -1,0 +1,17 @@
+.fade-enter-active,
+.fade-exit-active {
+  transition: var(--control-faster-duration);
+}
+.fade-enter,
+.fade-exit-to {
+  opacity: 0;
+}
+
+.scale-enter-active,
+.scale-exit-active {
+  transition: var(--control-faster-duration);
+}
+.scale-enter,
+.scale-exit-to {
+  scale: 1.05;
+}

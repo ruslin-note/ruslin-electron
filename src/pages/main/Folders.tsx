@@ -1,4 +1,6 @@
 import {
+  Button,
+  ContentDialog,
   IconButton,
   ListItem,
   TextBlock,
@@ -7,16 +9,18 @@ import {
 } from "@/components";
 import { IoAddSharp } from "solid-icons/io";
 import "./Folders.scss";
-import { For, createResource, createSignal } from "solid-js";
+import { For, Show, createResource, createSignal } from "solid-js";
 import appData from "@/lib/AppData";
 
 export const Folders = () => {
   let path = appData.path;
   console.log(path);
 
-  const [title, setTitle] = createSignal("");
+  const [newTitle, setNewTitle] = createSignal("");
   const [folders, { refetch }] = createResource(() => appData.loadFolders());
   const [selectedFolderId, setSelectedFolderId] = createSignal("");
+  const [showCreateNotebookDialog, setShowCreateNotebookDialog] =
+    createSignal(false);
 
   return (
     <div class="folders-container">
@@ -24,23 +28,11 @@ export const Folders = () => {
         <TextBlock variant={Variant.BodyStrong}>Notebooks</TextBlock>
         <IconButton
           onClick={() => {
-            if (title().length > 0) {
-              appData.createFolder(title()).then(() => {
-                setTitle("");
-                refetch();
-              });
-            }
+            setShowCreateNotebookDialog(true);
           }}
         >
           <IoAddSharp />
         </IconButton>
-      </div>
-      <div class="folders-header">
-        <TextBox
-          placeholder="name"
-          value={title()}
-          onChange={(e) => setTitle(e.target.value)}
-        ></TextBox>
       </div>
       <For each={folders()}>
         {(folder) => (
@@ -51,6 +43,37 @@ export const Folders = () => {
           ></ListItem>
         )}
       </For>
+      <Show when={showCreateNotebookDialog()}>
+        <ContentDialog
+          title="Create notebook"
+          onEscape={() => setShowCreateNotebookDialog(false)}
+          footer={
+            <>
+              <Button
+                variant="accent"
+                disabled={newTitle().length === 0}
+                onClick={() => {
+                  appData.createFolder(newTitle()).then(() => {
+                      setNewTitle("");
+                      setShowCreateNotebookDialog(false);
+                      refetch();
+                  });
+                }}>
+                OK
+              </Button>
+              <Button onClick={() => setShowCreateNotebookDialog(false)}>
+                Cancel
+              </Button>
+            </>
+          }
+        >
+          <TextBox
+            placeholder="name"
+            value={newTitle()}
+            onInput={(e) => setNewTitle(e.target.value)}
+          ></TextBox>
+        </ContentDialog>
+      </Show>
     </div>
   );
 };
