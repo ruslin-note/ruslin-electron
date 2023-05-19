@@ -9,6 +9,7 @@
   flex: 0 0 auto;
   margin: 3px 5px;
   padding-inline: 12px;
+  padding-block: 5px;
   border-radius: var(--control-corner-radius);
   outline: none;
   background-color: var(--subtle-fill-transparent);
@@ -16,7 +17,6 @@
   text-decoration: none;
   cursor: default;
   user-select: none;
-  block-size: 34px;
   text-decoration: none;
 
   &::before {
