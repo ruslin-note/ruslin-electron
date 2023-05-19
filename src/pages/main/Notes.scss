@@ -1,6 +1,12 @@
 .notes-container {
-  min-width: 200px;
-  padding: 16px;
+  width: 200px;
   display: flex;
   flex-direction: column;
+
+  .notes-header {
+    padding-block: 10px;
+    padding-inline: 16px;
+    display: flex;
+    flex-direction: column;
+  }
 }

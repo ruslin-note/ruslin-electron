@@ -1,10 +1,9 @@
-import type { Component } from "solid-js";
+import type { ParentComponent } from "solid-js";
 import "./ListItem.scss";
 
-export const ListItem: Component<{
+export const ListItem: ParentComponent<{
   selected: boolean;
   disabled?: boolean;
-  title: string;
   onClick: () => void;
 }> = (props) => {
   return (
@@ -16,7 +15,7 @@ export const ListItem: Component<{
       }}
       onClick={props.onClick}
     >
-      {props.title}
+      {props.children}
     </a>
   );
 };

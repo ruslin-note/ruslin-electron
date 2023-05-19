@@ -1,3 +1,3 @@
 const appData = window.__appData!;
-window.__appData = null;
+// window.__appData = null;
 export default appData;

@@ -20,7 +20,10 @@ import {
 import appData from "@/lib/AppData";
 import type { SyncInfo } from "ruslin-addon/addon";
 
-export const Folders = () => {
+export const Folders: VoidComponent<{
+  selectedFolder: string;
+  onSelectFolder: (folderId: string) => void;
+}> = (props) => {
   let path = appData.path;
   console.log(path);
 
@@ -28,7 +31,6 @@ export const Folders = () => {
   const [folders, { refetch: refetchFolders }] = createResource(() =>
     appData.loadFolders()
   );
-  const [selectedFolderId, setSelectedFolderId] = createSignal("");
   const [showCreateNotebookDialog, setShowCreateNotebookDialog] =
     createSignal(false);
 
@@ -45,13 +47,20 @@ export const Folders = () => {
             <IoAddSharp />
           </IconButton>
         </div>
+        <ListItem
+          selected={props.selectedFolder === ""}
+          onClick={() => props.onSelectFolder("")}
+        >
+          All notes
+        </ListItem>
         <For each={folders()}>
           {(folder) => (
             <ListItem
-              selected={selectedFolderId() === folder.id}
-              title={folder.title}
-              onClick={() => setSelectedFolderId(folder.id)}
-            ></ListItem>
+              selected={props.selectedFolder === folder.id}
+              onClick={() => props.onSelectFolder(folder.id)}
+            >
+              {folder.title}
+            </ListItem>
           )}
         </For>
       </div>

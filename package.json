@@ -15,7 +15,7 @@
     "napi": "napi build ruslin-addon --dts addon.d.ts --release",
     "napi:dev": "napi build ruslin-addon --dts addon.d.ts",
     "lint": "eslint ./src/**/*.{tsx,ts} && prettier --check src",
-    "format": "cargo fmt && eslint --fix ./src/**/*.{tsx,ts} && prettier --write src",
+    "fmt": "cargo fmt && eslint --fix ./src/**/*.{tsx,ts} && prettier --write src",
     "clean": "cargo clean && rm -rf dist dist-electron node_modules release"
   },
   "napi": {

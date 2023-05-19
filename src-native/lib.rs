@@ -2,7 +2,7 @@ use napi::bindgen_prelude::*;
 use napi_derive::napi;
 use ruslin_data::{
     sync::{SyncConfig, SyncInfo},
-    Folder, RuslinData, UpdateSource,
+    AbbrNote, Folder, Note, RuslinData, UpdateSource,
 };
 use std::path::PathBuf;
 
@@ -83,6 +83,35 @@ impl From<SyncInfo> for JsSyncInfo {
     }
 }
 
+#[napi(object, js_name = "AbbrNote")]
+pub struct JsAbbrNote {
+    pub id: String,
+    pub title: String,
+}
+
+impl From<AbbrNote> for JsAbbrNote {
+    fn from(value: AbbrNote) -> Self {
+        let AbbrNote { id, title, .. } = value;
+        Self { id, title }
+    }
+}
+
+#[napi(object, js_name = "Note")]
+pub struct JsNote {
+    pub id: String,
+    pub title: String,
+    pub body: String,
+}
+
+impl From<Note> for JsNote {
+    fn from(value: Note) -> Self {
+        let Note {
+            id, title, body, ..
+        } = value;
+        Self { id, title, body }
+    }
+}
+
 #[napi]
 pub struct AppData {
     data: RuslinData,
@@ -149,5 +178,30 @@ impl AppData {
             .await
             .map_err(|e| Error::from_reason(e.to_string()))?;
         Ok(sync_info.into())
+    }
+
+    #[napi]
+    pub async fn load_abbr_notes(&self, parent_id: String) -> Result<Vec<JsAbbrNote>> {
+        let parent_id = if parent_id.is_empty() {
+            None
+        } else {
+            Some(parent_id)
+        };
+        let notes = self
+            .data
+            .db
+            .load_abbr_notes(parent_id.as_deref())
+            .map_err(|e| Error::from_reason(e.to_string()))?;
+        Ok(notes.into_iter().map(|n| n.into()).collect())
+    }
+
+    #[napi]
+    pub async fn load_note(&self, id: String) -> Result<JsNote> {
+        Ok(self
+            .data
+            .db
+            .load_note(&id)
+            .map_err(|e| Error::from_reason(e.to_string()))?
+            .into())
     }
 }
