@@ -1,6 +1,9 @@
 use napi::bindgen_prelude::*;
 use napi_derive::napi;
-use ruslin_data::{Folder, RuslinData, UpdateSource};
+use ruslin_data::{
+    sync::{SyncConfig, SyncInfo},
+    Folder, RuslinData, UpdateSource,
+};
 use std::path::PathBuf;
 
 #[napi]
@@ -20,6 +23,62 @@ impl From<Folder> for JsFolder {
         Self {
             id: value.id,
             title: value.title,
+        }
+    }
+}
+
+#[napi(object, js_name = "SyncConfig")]
+pub struct JsSyncConfig {
+    pub host: String,
+    pub email: String,
+    pub password: String,
+}
+
+impl From<JsSyncConfig> for SyncConfig {
+    fn from(value: JsSyncConfig) -> Self {
+        let JsSyncConfig {
+            host,
+            email,
+            password,
+        } = value;
+        Self::JoplinServer {
+            host,
+            email,
+            password,
+        }
+    }
+}
+
+#[napi(object, js_name = "SyncInfo")]
+pub struct JsSyncInfo {
+    pub delete_remote_count: i32,
+    pub conflict_note_count: i32,
+    pub other_conflict_count: i32,
+    pub upload_count: i32,
+    pub delete_count: i32,
+    pub pull_count: i32,
+    pub elapsed_time: f64,
+}
+
+impl From<SyncInfo> for JsSyncInfo {
+    fn from(value: SyncInfo) -> Self {
+        let SyncInfo {
+            delete_remote_count,
+            conflict_note_count,
+            other_conflict_count,
+            upload_count,
+            delete_count,
+            pull_count,
+            elapsed_time,
+        } = value;
+        Self {
+            delete_remote_count,
+            conflict_note_count,
+            other_conflict_count,
+            upload_count,
+            delete_count,
+            pull_count,
+            elapsed_time,
         }
     }
 }
@@ -71,5 +130,24 @@ impl AppData {
             .map(|x| x.into())
             .collect::<Vec<JsFolder>>();
         Ok(folders)
+    }
+
+    #[napi]
+    pub async fn save_sync_config(&self, sync_config: JsSyncConfig) -> Result<()> {
+        self.data
+            .save_sync_config(sync_config.into())
+            .await
+            .map_err(|e| Error::from_reason(e.to_string()))?;
+        Ok(())
+    }
+
+    #[napi]
+    pub async fn synchronize(&self, from_scratch: bool) -> Result<JsSyncInfo> {
+        let sync_info = self
+            .data
+            .synchronize(from_scratch)
+            .await
+            .map_err(|e| Error::from_reason(e.to_string()))?;
+        Ok(sync_info.into())
     }
 }

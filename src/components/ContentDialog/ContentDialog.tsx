@@ -26,18 +26,15 @@ export const ContentDialog: ParentComponent<{
     createEffect(() => {
       const e = event();
       if (e && e.key === "Escape") {
-          onEscape();
-          e.preventDefault();
+        onEscape();
+        e.preventDefault();
       }
     });
   }
 
   return (
     <Transition appear name="fade">
-      <div
-        class="content-dialog-smoke"
-        classList={{ darken: props.darken }}
-      >
+      <div class="content-dialog-smoke" classList={{ darken: props.darken }}>
         <Transition appear name="scale">
           <div
             class="content-dialog"

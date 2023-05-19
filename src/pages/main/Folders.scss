@@ -1,6 +1,10 @@
 .folders-container {
   min-width: 180px;
   background-color: var(--solid-background-base);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 6px;
 
   .folders-header {
     padding-block: 10px;
@@ -8,5 +12,12 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
+
+  .folders-footer {
+    padding-block: 10px;
+    padding-inline: 16px;
+    display: flex;
+    flex-direction: column;
   }
 }

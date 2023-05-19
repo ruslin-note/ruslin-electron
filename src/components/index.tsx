@@ -6,3 +6,4 @@ export * from "./IconButton/IconButton";
 export * from "./TextBox/TextBox";
 export * from "./Button/Button";
 export * from "./ContentDialog/ContentDialog";
+export * from "./ProgressRing/ProgressRing";
