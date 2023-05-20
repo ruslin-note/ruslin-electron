@@ -204,4 +204,22 @@ impl AppData {
             .map_err(|e| Error::from_reason(e.to_string()))?
             .into())
     }
+
+    #[napi]
+    pub async fn save_note_body(&self, id: String, body: String) -> Result<()> {
+        self.data
+            .db
+            .update_note_body(&id, &body)
+            .map_err(|e| Error::from_reason(e.to_string()))?;
+        Ok(())
+    }
+
+    #[napi]
+    pub async fn save_note_title(&self, id: String, title: String) -> Result<()> {
+        self.data
+            .db
+            .update_note_title(&id, &title)
+            .map_err(|e| Error::from_reason(e.to_string()))?;
+        Ok(())
+    }
 }

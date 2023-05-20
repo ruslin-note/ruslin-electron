@@ -5,7 +5,7 @@ import appData from "@/lib/AppData";
 
 export const Notes: VoidComponent<{
   selectedFolder: string;
-  selectedNote: string;
+  selectedNote: string | null;
   onSelectNote: (noteId: string) => void;
 }> = (props) => {
   // Cannot use `null`. https://www.solidjs.com/docs/latest/api#createresource

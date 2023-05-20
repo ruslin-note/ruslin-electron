@@ -6,7 +6,7 @@ import { createSignal } from "solid-js";
 
 export const Main = () => {
   const [selectedFolder, setSelectedFolder] = createSignal("");
-  const [selectedNote, setSelectedNote] = createSignal("");
+  const [selectedNote, setSelectedNote] = createSignal<string | null>(null);
   return (
     <div class="main-container">
       <Folders

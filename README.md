@@ -58,3 +58,4 @@ npm run build
 ## Credits
 
 - [ferrum](https://github.com/probablykasper/ferrum)
+- [solid-codemirror](https://github.com/riccardoperra/solid-codemirror)
