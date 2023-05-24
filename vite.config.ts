@@ -24,6 +24,9 @@ export default defineConfig({
       {
         // Main-Process entry file of the Electron App.
         entry: 'electron/main.ts',
+        onstart(options) {
+          options.startup(['.', '--no-sandbox', '--ozone-platform-hint=auto', '--enable-wayland-ime'])
+        },
         vite: {
           build: {
             rollupOptions: {

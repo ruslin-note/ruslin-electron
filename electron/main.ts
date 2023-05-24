@@ -13,7 +13,7 @@ const url = process.env.VITE_DEV_SERVER_URL
 function createWindow() {
   win = new BrowserWindow({
     icon: join(process.env.PUBLIC, 'logo.svg'),
-    title: 'Test',
+    title: 'Ruslin',
     webPreferences: {
       contextIsolation: false,
       nodeIntegration: true,
@@ -29,7 +29,7 @@ function createWindow() {
 
   if (url) {
     win.loadURL(url)
-    win.webContents.openDevTools()
+    // win.webContents.openDevTools()
   } else {
     win.loadFile(join(process.env.DIST, 'index.html'))
   }

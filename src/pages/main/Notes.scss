@@ -1,7 +1,11 @@
 .notes-container {
-  width: 200px;
+  width: 220px;
   display: flex;
   flex-direction: column;
+
+  .notes-list {
+    overflow-y: auto;
+  }
 
   .notes-header {
     padding-block: 10px;

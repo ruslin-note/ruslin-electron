@@ -9,6 +9,39 @@ import {
 } from "solid-js";
 import { EditorView } from "@codemirror/view";
 import { EditorState } from "@codemirror/state";
+import {
+  markdown as markdownLanguage,
+  markdownLanguage as gfmLanguage,
+} from "@codemirror/lang-markdown";
+import { tags } from "@lezer/highlight";
+import {
+  HighlightStyle,
+  LanguageSupport,
+  syntaxHighlighting,
+} from "@codemirror/language";
+import "./CodeMirror.scss";
+
+const markdownHighlightStyle = HighlightStyle.define([
+  { tag: tags.link, class: "e-link" },
+  { tag: tags.heading, class: "e-header" },
+  { tag: tags.heading1, class: "e-header e-h1" },
+  { tag: tags.heading2, class: "e-header e-h2" },
+  { tag: tags.heading3, class: "e-header e-h3" },
+  { tag: tags.emphasis, class: "e-emphasis" },
+  { tag: tags.strong, class: "e-strong" },
+  { tag: tags.strikethrough, class: "e-strikethrough" },
+]);
+
+export const markdown = () => {
+  const { language, support } = markdownLanguage({
+    base: gfmLanguage,
+  });
+
+  return new LanguageSupport(language, [
+    support,
+    syntaxHighlighting(markdownHighlightStyle),
+  ]);
+};
 
 export interface CreateCodeMirrorProps {
   value: string;
@@ -39,7 +72,7 @@ export function createCodeMirror(props: CreateCodeMirrorProps) {
 
       const state = EditorState.create({
         doc: props?.value ?? "",
-        extensions: [onBlurListener],
+        extensions: [markdown(), onBlurListener, EditorView.lineWrapping],
       });
       const currentView = new EditorView({
         state,
@@ -59,6 +92,7 @@ export function createCodeMirror(props: CreateCodeMirrorProps) {
           }
         },
       });
+      currentView.dom.style.height = "100%";
 
       onMount(() => setEditorView(currentView));
 

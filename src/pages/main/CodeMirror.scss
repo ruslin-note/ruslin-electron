@@ -1,0 +1,28 @@
+.code-mirror-container {
+  .e-header {
+    font-weight: bold;
+  }
+
+  .e-h1 {
+    font-size: var(--title-font-size);
+    font-weight: bold;
+  }
+  .e-h2 {
+    font-size: var(--subtitle-font-size);
+  }
+  .e-h3 {
+    font-size: var(--body-large-font-size);
+  }
+  .e-strong {
+    font-weight: bold;
+  }
+  .e-emphasis {
+    font-style: italic;
+  }
+  .e-strikethrough {
+    text-decoration: line-through;
+  }
+  .e-link {
+    text-decoration: underline;
+  }
+}

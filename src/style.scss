@@ -28,4 +28,28 @@ body {
 #app {
   flex: 1;
   display: flex;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* Track */
+::-webkit-scrollbar {
+  width: 6px; /* adjust the width as needed */
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* background color of the track */
+  border-radius: 3px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; /* color of the scroll thumb */
+  // backgroundClip: 'content-box',
+  background-clip: content-box;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* color of the scroll thumb on hover */
 }

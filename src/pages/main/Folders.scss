@@ -1,10 +1,15 @@
 .folders-container {
-  width: 180px;
+  width: 200px;
   background-color: var(--solid-background-base);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding-bottom: 6px;
+
+  .folders-list {
+    flex: 1;
+    overflow-y: auto;
+  }
 
   .folders-header {
     padding-block: 10px;

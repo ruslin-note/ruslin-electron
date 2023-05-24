@@ -7,6 +7,9 @@ import { createSignal } from "solid-js";
 export const Main = () => {
   const [selectedFolder, setSelectedFolder] = createSignal("");
   const [selectedNote, setSelectedNote] = createSignal<string | null>(null);
+  const [newNoteTitle, setNewNoteTitle] = createSignal<
+    { id: string; newTitle: string } | undefined
+  >(undefined);
   return (
     <div class="main-container">
       <Folders
@@ -16,9 +19,15 @@ export const Main = () => {
       <Notes
         selectedFolder={selectedFolder()}
         selectedNote={selectedNote()}
+        newNoteTitle={newNoteTitle()}
         onSelectNote={setSelectedNote}
       ></Notes>
-      <Editor selectedNote={selectedNote()}></Editor>
+      <Editor
+        selectedNote={selectedNote()}
+        onTitleChange={(id, newTitle) => {
+          setNewNoteTitle({ id, newTitle });
+        }}
+      ></Editor>
     </div>
   );
 };

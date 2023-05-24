@@ -36,17 +36,17 @@ export const Folders: VoidComponent<{
 
   return (
     <div class="folders-container">
-      <div>
-        <div class="folders-header">
-          <TextBlock variant={Variant.BodyStrong}>Notebooks</TextBlock>
-          <IconButton
-            onClick={() => {
-              setShowCreateNotebookDialog(true);
-            }}
-          >
-            <IoAddSharp />
-          </IconButton>
-        </div>
+      <div class="folders-header">
+        <TextBlock variant={Variant.BodyStrong}>Notebooks</TextBlock>
+        <IconButton
+          onClick={() => {
+            setShowCreateNotebookDialog(true);
+          }}
+        >
+          <IoAddSharp />
+        </IconButton>
+      </div>
+      <div class="folders-list">
         <ListItem
           selected={props.selectedFolder === ""}
           onClick={() => props.onSelectFolder("")}

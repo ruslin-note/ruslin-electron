@@ -1,8 +1,20 @@
 .note-detail-container {
   background-color: var(--text-on-accent-primary);
-  border: 1px solid var(--card-stroke-default);
-  border-radius: var(--overlay-corner-radius);
-  margin: 6px;
   flex: 1;
   padding: 16px;
+  display: flex;
+  flex-direction: column;
+
+  .note-title {
+    font-size: var(--title-font-size);
+    margin-bottom: 16px;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+  }
+
+  .code-mirror-container {
+    overflow: hidden;
+    height: 100%;
+  }
 }

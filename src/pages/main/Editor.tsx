@@ -1,4 +1,4 @@
-import { Show, VoidComponent, createResource } from "solid-js";
+import { Show, VoidComponent, createResource, onCleanup } from "solid-js";
 import "./Editor.scss";
 import appData from "@/lib/AppData";
 import { createCodeMirror, createEditorControlledValue } from "./CodeMirror";
@@ -8,12 +8,18 @@ const saveNoteBody = (id: string, body: string) =>
     console.error(e);
   });
 
+const saveNoteTitle = (id: string, title: string) =>
+  appData.saveNoteTitle(id, title).catch((e) => {
+    console.error(e);
+  });
+
 export const Editor: VoidComponent<{
   selectedNote: string | null;
+  onTitleChange: (id: string, title: string) => void;
 }> = (props) => {
   const [note] = createResource(
     () => props.selectedNote,
-    (noteId) => appData.loadNote(noteId)
+    (selectedNote) => appData.loadNote(selectedNote)
   );
 
   const { editorView, ref: editorRef } = createCodeMirror({
@@ -30,10 +36,54 @@ export const Editor: VoidComponent<{
 
   return (
     <div class="note-detail-container">
-      <Show when={!!note()}>
-        <div>{note()?.title}</div>
-        <div ref={editorRef}></div>
+      <Show when={note()}>
+        {(note) => (
+          <>
+            <TitleInput
+              title={note().title}
+              onInput={(newTitle) => props.onTitleChange(note().id, newTitle)}
+              onSaveTitle={(newTitle) => saveNoteTitle(note().id, newTitle)}
+            />
+            <div class="code-mirror-container" ref={editorRef}></div>
+          </>
+        )}
       </Show>
     </div>
+  );
+};
+
+const TitleInput: VoidComponent<{
+  title: string;
+  onInput: (newTitle: string) => void;
+  onSaveTitle: (newTitle: string) => void;
+}> = (props) => {
+  let delayTimer: NodeJS.Timeout | undefined;
+  let changed: boolean = false;
+
+  onCleanup(() => {
+    clearTimeout(delayTimer);
+  });
+
+  return (
+    <input
+      class="note-title"
+      value={props.title}
+      onInput={(e) => {
+        props.onInput(e.target.value);
+        changed = true;
+        clearTimeout(delayTimer);
+        delayTimer = setTimeout(() => {
+          props.onSaveTitle(e.target.value);
+          changed = false;
+        }, 1000);
+      }}
+      onBlur={(e) => {
+        if (changed) {
+          props.onSaveTitle(e.target.value);
+          changed = false;
+          clearTimeout(delayTimer);
+        }
+      }}
+    ></input>
   );
 };
