@@ -49,7 +49,7 @@
     "solid-js": "^1.7.5",
     "solid-transition-group": "^0.2.2",
     "typescript": "^5.0.4",
-    "vite": "^4.3.5",
+    "vite": "^4.3.9",
     "vite-plugin-electron": "^0.11.2",
     "vite-plugin-solid": "^2.7.0"
   }
